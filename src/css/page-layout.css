@@ -1,0 +1,165 @@
+/* Basic layout of the app */
+
+@font-face { 
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src:url("./fonts/SourceHanSansCN-Medium.otf") format("OpenType"),
+        url("./fonts/SourceHanSansCN-Bold.otf") format("OpenType"),
+        url("./fonts/SourceHanSansCN-Regular.otf") format("OpenType"),
+        url("./fonts/OpenSans-BoldItalic.ttf") format("OpenType"),
+}
+
+body,html {
+    overflow: hidden;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    -webkit-app-region: no-drag;
+}
+
+
+.titlebar {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #DDDDDD;
+    -webkit-app-region: drag;
+}
+
+.icon {
+    width: 50px;
+    height: 30px;
+    margin-left: 2px;
+    line-height: 30px;
+    user-select: none;
+}
+
+.titleName {
+    width: 300px;
+    height: 30px;
+    line-height: 30px;
+    user-select: none;
+}
+
+.titleName p {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: 'Open Sans';
+}
+
+.windowManage {
+    width: 150px;
+    height: 30px;
+    display: flex;
+    -webkit-app-region: no-drag;
+}
+
+
+/* window control icons */
+.winMin, .winMax, .winClose, .winRestore{
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.winMin::before {
+    content: '\2013';
+}
+
+.winRestore::before {
+    content: '\1F5D7';
+}
+.winMax::before{
+    content: '\20DE';
+}
+
+.winClose::before{
+    content: '\2715';
+}
+
+/* 	content:'\1F5D7' */
+
+.winMin:hover, .winMax:hover, .winRestore:hover {
+    background-color: #C6C6C6;
+}
+
+
+.winClose:hover {
+    background-color: #E81123;
+    color: white;
+}
+
+
+.sidebar {
+    width: 45px;
+    height: 96vh;
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+
+.sidebarLabel {
+    margin: 5px;
+    padding-left: 10px;
+    width: 30px;
+    height: 40px;
+    text-align: left;
+    line-height: 40px;
+    font-size: 18px;
+    font-family: 'Open Sans';
+    color: black;
+    border-radius: 10px;
+    user-select: none;
+    overflow:hidden;
+    z-index: 2;
+}
+
+.sidebarLabel span {
+    color: #5A5A5A;
+    width: 30px;
+}
+
+.sidebarLabel:hover {
+    width: 120px;
+    background-color: #E3E3E3;
+    cursor: pointer;
+    transition-duration: 0.6s;
+}
+
+/* TODO: Fix the width */
+.mainContent {
+    width: calc(100% - 45px);   
+    height: 100%;
+    z-index: 0;
+}
+
+.mainContent span {
+    font-size: 14px;
+    color: #5A5A5A;
+}
+
+.rowView {
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn;   /* Put some animation when loading a page */
+    animation-duration: 1s;
+}
+
+.columnView {
+    height: 100vh;
+    display: flex;
+    animation: fadeIn;
+    animation-duration: 1s;
+}

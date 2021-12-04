@@ -1,0 +1,30 @@
+.aboutContent {
+    margin: 20px;
+    width: 80vw;
+    height: 70vh;
+    justify-content: center;
+    background-color: #E3E3E3;
+}
+
+span {
+    font-size: 14px;
+    font-family: 'Open Sans';
+    color: #5A5A5A;
+    user-select: none;
+}
+
+.logoPNG {
+    width: 60%;
+    height: 60px;
+    margin: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #E4E4E4;
+    border-radius: 20px;
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 20px 0 rgba(0,0,0,0.19);
+}
+
+img {
+    user-select: none;
+}

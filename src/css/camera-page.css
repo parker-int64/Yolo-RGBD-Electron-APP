@@ -1,0 +1,33 @@
+.columnView {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.cameraViewArea {
+    width: 400px;
+    height: 400px;
+    margin-bottom: 30px;
+    background-color: #E3E3E3;
+}
+
+
+.cameraControl {
+    margin: 5px;
+    width: 300px;
+    height: 30px;
+    background-color: #E3E3E3;
+}
+
+.infoPanel {
+    width: 240px;
+    height: 100vh;
+    background-color: #F5F5F5;
+}
+
+
+
+

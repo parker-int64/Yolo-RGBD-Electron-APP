@@ -1,0 +1,37 @@
+/* Home page */
+.quoteText {
+    font-size: 18px;
+    color: #5A5A5A;
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+
+
+.homepageButtons {
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.homepageButtons:hover {
+    background-color: #E3E3E3;
+    cursor: pointer;
+    transition-duration: 0.6s;
+}
+
+.homepageButtons span {
+    font-size: 14px;
+    text-align: center;
+    margin: 10px;
+    color: #5A5A5A;
+}
+
+
