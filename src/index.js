@@ -20,20 +20,27 @@ import AboutPage from './AboutPage';
 
 import reportWebVitals from './reportWebVitals';
 
-const ipcRenderer = window.ipcRenderer;
+// Electron interact APIs
+const API = window.api
+
 
 
 
 // listening events, if you're using the web broswer to debug
-// please comment the ipcRenderer part
+// please comment the API part
 let changeIcon = false
-// ipcRenderer.on("change-icon", ()=>{
-//     changeIcon = true
-// })
 
-// ipcRenderer.on("restore-icon", ()=>{
-//   changeIcon = false
-// })
+API.receive("change-icon", ()=> {
+  changeIcon = true
+  document.getElementById("win-max").className = "winRestore"
+  console.log(changeIcon)
+})
+
+API.receive("restore-icon", () => {
+  changeIcon = false
+  document.getElementById("win-max").className = "winMax"
+  console.log(changeIcon)
+})
 
 class Container extends React.Component {
   render() {
@@ -60,28 +67,16 @@ class Titlebar extends React.Component {
   }
 
   sendMinimize() {
-    ipcRenderer.send("win-minimize")
+    API.sendWinMinimizeSignal()
   }
 
   sendMaximize = (e)=> {
-    if(changeIcon){
-      this.setState({
-        className: "winMax"
-      })
-    } else {
-      this.setState({
-        className: "winRestore"
-      })
-    }
-    ipcRenderer.send("win-maximize")
+    API.sendWinMaximizeSignal()
   }
 
   sendClose() {
-    ipcRenderer.send("win-close")
+    API.sendWinCloseSignal()
   }
-
-  
-
   
   render() {
     return(
@@ -92,7 +87,8 @@ class Titlebar extends React.Component {
           <div className="winMin" id="win-min" onClick={this.sendMinimize}></div>
           <div className={this.state.className} id="win-max" 
           onClick={this.sendMaximize} 
-          > </div>
+          >
+          </div>
           <div className="winClose" id="win-close" onClick={this.sendClose}></div>
         </div>
       </div>
@@ -177,6 +173,7 @@ ReactDOM.render(
 /*
   Function: RenderMainContent
   Description: Render the page.
+  TODO: Use NextJS routing pages.
 */
 function RenderMainContent(){
   const homeLabel = document.getElementById("home")
@@ -221,6 +218,7 @@ function RenderPage(pageName){
 
 // Render the page via sidebar buttons
 RenderMainContent()
+
 
 
 reportWebVitals();

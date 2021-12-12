@@ -2,7 +2,10 @@
 const {app, BrowserWindow, Menu, ipcMain} = require('electron')
 const path = require('path')
 
+const maxEvent = require('events').EventEmitter.defaultMaxListeners = 0
+
 function createWindow () {
+  // Close the default menu
   Menu.setApplicationMenu(null);
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -12,10 +15,7 @@ function createWindow () {
     minHeight: 600,
     frame: false,
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-      preload: path.join(__dirname, '/preload.js')
-
+      preload: path.join(__dirname, 'preload.js')
     }
   })
 
@@ -23,41 +23,42 @@ function createWindow () {
   // mainWindow.loadFile('index.html')
   
   // React localhost and port
-  mainWindow.loadURL('http://localhost:3009/');
+  mainWindow.loadURL('http://localhost:3000/');
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
 
+  // Use Handle Method
+
   // Minimize the window
-  ipcMain.on("win-minimize",  ()=>{
+  ipcMain.handle("win-minimize", () => {
     mainWindow.minimize();
-  });
+  })
 
   // Maximize the window
-  ipcMain.on("win-maximize",  ()=>{
-    if (mainWindow.isMaximized()) {
-      // restore if the window is already the maximize size
-      mainWindow.unmaximize()
-  } else {
-      // maximize the window
-      mainWindow.maximize()
-  }
-  });
+  ipcMain.handle("win-maximize", () => {
+    mainWindow.isMaximized() ? mainWindow.unmaximize() : mainWindow.maximize()
+    // change the maxmize icon to the overlap   
+  })
+
+  mainWindow.on('maximize', async ()=>{
+    mainWindow.webContents.send("change-icon")
+  })
+
+  // well, change the maximize icon 
+  // when restored to the default size
+  mainWindow.on('unmaximize', async ()=>{
+    mainWindow.webContents.send("restore-icon")
+  })
 
   // Close the window
-  ipcMain.on("win-close",  ()=>{
-    mainWindow.close();
-  });
+  ipcMain.handle("win-close", () => {
+    mainWindow.close()
+  })
 
-  // change the maxmize icon to the overlap 
-  mainWindow.on('maximize', ()=>{
-    mainWindow.webContents.send("change-icon")
-  });
 
-  // well, change the maximize icon when restored to the default size
-  mainWindow.on('unmaximize', ()=>{
-      mainWindow.webContents.send("restore-icon")
-  });
+
+
 }
 
 // This method will be called when Electron has finished

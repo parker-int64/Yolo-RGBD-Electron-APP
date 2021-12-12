@@ -4,8 +4,7 @@
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
-    src:url("./fonts/SourceHanSansCN-Medium.otf") format("OpenType"),
-        url("./fonts/SourceHanSansCN-Bold.otf") format("OpenType"),
+    src:url("./fonts/SourceHanSansCN-Bold.otf") format("OpenType"),
         url("./fonts/SourceHanSansCN-Regular.otf") format("OpenType"),
         url("./fonts/OpenSans-BoldItalic.ttf") format("OpenType"),
 }
@@ -73,8 +72,10 @@ body,html {
     content: '\2013';
 }
 
-.winRestore::before {
-    content: '\1F5D7';
+.winRestore {
+    background-image: url(./png/window-overlay.png);
+    background-repeat:no-repeat;
+    background-size:100% 100%;
 }
 .winMax::before{
     content: '\20DE';
@@ -84,10 +85,14 @@ body,html {
     content: '\2715';
 }
 
-/* 	content:'\1F5D7' */
-
-.winMin:hover, .winMax:hover, .winRestore:hover {
+.winMin:hover, .winMax:hover{
     background-color: #C6C6C6;
+}
+
+.winRestore:hover {
+    background-image: url(./png/window-overlay-hover.png);
+    background-repeat:no-repeat;
+    background-size:100% 100%;
 }
 
 
